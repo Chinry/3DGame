@@ -22,8 +22,9 @@ void error_handle_console(Error *err);
 
 //quick print the values of a data object
 //will run through a struct or buffer 
+
+
 void error_get_stuff(Error err, void *thing, //object to run through
                                 size_t size, //number of bytes object spans
-                                size_t align, //number of bytes per line
-                                              // make it a prexisting type
+                                size_t align, //datatype
                                 char* format); //number base to display in

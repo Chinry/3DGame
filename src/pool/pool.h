@@ -3,14 +3,17 @@
 
 //worker_info_t
 typedef struct{
-  
-}worker_info_t
+     
+}worker_info_t;
+
 
 //Pool
 typedef struct{
+  pthread_t *queue_thread;
   pthread_t *threads; 
   int num_threads; 
-  worker_info_t info;
+  worker_info_t *info;
+  void *data_obj;
 }Pool;
 
 

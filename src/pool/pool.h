@@ -1,5 +1,6 @@
 //pool
 #include "../error/error.h"
+#include "../data_struct/queue.h"
 
 //worker_info_t
 typedef struct{
@@ -14,6 +15,7 @@ typedef struct{
   int num_threads; 
   worker_info_t *info;
   void *data_obj;
+  work_queue_t queue;
 }Pool;
 
 

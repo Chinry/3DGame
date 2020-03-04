@@ -6,7 +6,7 @@
 
 //queue
 typedef struct{
-  int inital_num_nodes;
+  int initial_num_nodes;
   int num_alloc_nodes; //number of allocated nodes
   int total; //number of nodes that have data
   int top;
@@ -14,7 +14,7 @@ typedef struct{
   void **nodes;
 }queue;
 
-
-void queue_add(Error err);
+void queue_realloc(queue *q, char enlarge);
+void queue_add(queue *q, void *data);
 queue *queue_init(int nodes);
-void *queue_get();
+void *queue_get(queue *q);

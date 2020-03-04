@@ -15,7 +15,7 @@ typedef struct{
   int num_threads; 
   worker_info_t *info;
   void *data_obj;
-  work_queue_t queue;
+  queue *q;
 }Pool;
 
 

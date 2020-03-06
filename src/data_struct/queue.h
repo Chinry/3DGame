@@ -17,4 +17,6 @@ typedef struct{
 void queue_realloc(queue *q, char enlarge);
 void queue_add(queue *q, void *data);
 queue *queue_init(int nodes);
+void queue_free(queue *q);
 void *queue_get(queue *q);
+int queue_size(queue *q);

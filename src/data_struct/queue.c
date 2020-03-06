@@ -4,10 +4,18 @@ queue *queue_init(int initial_nodes){ //not going to check for super small queue
   queue *q = (queue*)malloc(sizeof(queue));
   q->num_alloc_nodes = initial_nodes;
   q->initial_num_nodes = initial_nodes;
-  q->nodes = (void**)calloc(sizeof(void*) * initial_nodes, sizeof(void*));
+  q->nodes = (void**)malloc(sizeof(void*) * initial_nodes);
   q->top = q->bot = -1;
   q->total = 0;
 }
+
+void queue_free(queue *q){
+  free(q->nodes);
+  free(q);
+}
+
+
+
 void queue_add(queue *q, void *data){
   if (q->top == -1){
     q->total = 1; 
@@ -41,24 +49,27 @@ void *queue_get(queue *q){
 void queue_realloc(queue *q, char enlarge){
   void **old_nodes = q->nodes;
   if(enlarge){
-    q->nodes = (void**)calloc(sizeof(void*) * q->num_alloc_nodes * 2, sizeof(void*));
+    q->nodes = (void**)malloc(sizeof(void*) * q->num_alloc_nodes * 2);
     int offset = q->bot;
     for(int i = 0; i < q->total; i++){
-      if((i + offset) > q->num_alloc_nodes) offset = 0;
+      if((i + offset) == q->num_alloc_nodes) offset = 0;
       (q->nodes)[i] = old_nodes[i + offset];
     }
-    q->num_alloc_nodes = (q->num_alloc_nodes * 2);
+    q->num_alloc_nodes = q->num_alloc_nodes * 2;
   }
   else{
-    q->nodes = (void**)calloc(sizeof(void*) * (q->num_alloc_nodes / 2), sizeof(void*));
+    q->nodes = (void**)malloc(sizeof(void*) * (q->num_alloc_nodes / 2));
     int offset = q->bot;
     for(int i = 0; i < q->total; i++){
-      if((i + offset) > q->num_alloc_nodes) offset = 0;
+      if((i + offset) == q->num_alloc_nodes) offset = 0;
       (q->nodes)[i] = old_nodes[i + offset];
     }
-    q->num_alloc_nodes = (q->num_alloc_nodes / 2);
+    q->num_alloc_nodes = q->num_alloc_nodes / 2;
   }
-  q->top = 0;
-  q->bot = q->total - 1;
+  q->bot = 0;
+  q->top = q->total - 1;
   free(old_nodes);
+}
+int queue_size(queue *q){
+  return q->total;
 }

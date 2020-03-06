@@ -19,5 +19,6 @@ int main(int argc, char **argv){
     }
     printf("\n");
   } 
+  queue_free(q);
   return 0;
 }

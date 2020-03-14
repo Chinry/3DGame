@@ -7,5 +7,9 @@
 
 
 int main(int argc, char **argv){
+  Error *err = error_new(1024);
+  err->handler = &error_handle_console;
+  Pool *p = pool_create(4, err);
+  if(engine_run){}
   return 0; 
 }

@@ -2,8 +2,8 @@
 typedef struct error{
   char *message; //actual error message
   int size; 
-  bool is_set; // is the error set
-  void (*handler)(struct *error, void *); //associate a function for logging or printing 
+  char is_set; // is the error set
+  void (*handler)(struct error *, void *); //associate a function for logging or printing 
 }Error;
 
 //initialize an error object and size of message buffer in bytes
@@ -18,7 +18,7 @@ int error_check(Error *err);
 void error_set(Error *err, char *text);
 
 //print error to console, maybe more options like logging in the future
-void error_handle_console(Error *err);
+void error_handle_console(Error *err, void *ptr);
 
 //quick print the values of a data object
 //will run through a struct or buffer 
